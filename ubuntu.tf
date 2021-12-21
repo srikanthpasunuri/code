@@ -1,6 +1,6 @@
 provider "aws" {
-  access_key = "AKIA27BRXH7YOZSSIWP6"
-  secret_key = "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"
+  access_key = "AKIA27BRXH7YEVSIJBTG"
+  secret_key = "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"
   region     = "us-east-1"
 }
 resource "aws_instance" "mac_Ubuntu2" {
