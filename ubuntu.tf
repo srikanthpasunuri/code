@@ -3,8 +3,20 @@ provider "aws" {
   secret_key = "v/rHKc4oMK5DqQRcCmtqSEZ/AMgtuQx7eSnnUJRy"
   region     = "us-east-1"
 }
-resource "aws_instance" "mac_Ubuntu2" {
-  ami           = "ami-04505e74c0741db8d"
-  instance_type = "t2.micro"
-  key_name      = "Navya"
-}
+resource "aws_instance" "myec2" {
+     ami= "ami-074cce78125f09d61"
+     instance_type = "t2.micro"
+     key_name = "raghu-terraform"
+provisioner "remote-exec"{
+  inline = [
+    "sudo amazon-linux-extras install -y nginx1.12"
+    #yum -y install nginx1.12 (if centos linux)
+    "sudo systemctl start nginx
+  ]
+  #for giving user name and pem access_key
+  connection {
+    type = "ssh"
+    user = "ec2-user"
+    private_key = file("./raghu-terraform.pem")
+    host = self.public_ip
+  }
